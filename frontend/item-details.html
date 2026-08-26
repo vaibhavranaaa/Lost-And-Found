@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Item Details - Lost & Found</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>Lost & Found</h1>
+
+        <nav>
+
+            <a href="user-dashboard.html">Dashboard</a>
+            <a href="items.html">Items</a>
+            <a href="report-item.html">Report Item</a>
+            <a href="claims.html">My Claims</a>
+
+            <button id="logoutBtn">Logout</button>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <div id="message"></div>
+
+        <div id="itemDetails" class="details-card"></div>
+
+        <div id="claimSection" class="claim-box">
+
+            <h2>Claim This Item</h2>
+
+            <p>
+                If this item belongs to you, explain why you are claiming it.
+            </p>
+
+            <textarea
+                id="claimMessage"
+                rows="5"
+                placeholder="Explain why this item belongs to you..."
+            ></textarea>
+
+            <button id="claimBtn">
+                Submit Claim
+            </button>
+
+            <p id="claimMessageResult"></p>
+
+        </div>
+
+    </main>
+
+
+    <script src="js/item-details.js"></script>
+
+</body>
+
+</html>

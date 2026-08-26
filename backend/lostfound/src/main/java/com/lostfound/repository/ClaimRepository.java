@@ -10,4 +10,6 @@ public interface ClaimRepository extends JpaRepository<Claim, Long> {
     List<Claim> findByItemId(Long itemId);
 
     List<Claim> findByUserId(Long userId);
+
+    void deleteByItemId(Long itemId);
 }

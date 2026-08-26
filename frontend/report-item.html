@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Report Item - Lost & Found</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+
+        <h1>Lost & Found</h1>
+
+        <nav>
+            <a href="user-dashboard.html">Dashboard</a>
+            <a href="items.html">Items</a>
+            <a href="report-item.html">Report Item</a>
+            <a href="claims.html">My Claims</a>
+
+            <button id="logoutBtn">Logout</button>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <div class="form-card">
+
+            <h2>Report Lost / Found Item</h2>
+
+            <p>
+                Enter the details of the item below.
+            </p>
+
+            <form id="itemForm">
+
+                <label for="itemName">Item Name</label>
+
+                <input
+                    type="text"
+                    id="itemName"
+                    placeholder="Example: Black Wallet"
+                    required
+                >
+
+
+                <label for="category">Category</label>
+
+                <input
+                    type="text"
+                    id="category"
+                    placeholder="Example: Accessories"
+                    required
+                >
+
+
+                <label for="description">Description</label>
+
+                <textarea
+                    id="description"
+                    rows="5"
+                    placeholder="Describe the item..."
+                    required
+                ></textarea>
+
+
+                <label for="location">Location</label>
+
+                <input
+                    type="text"
+                    id="location"
+                    placeholder="Example: Sharda University"
+                    required
+                >
+
+
+                <label for="date">Date</label>
+
+                <input
+                    type="date"
+                    id="date"
+                    required
+                >
+
+
+                <label for="type">Type</label>
+
+                <select id="type" required>
+
+                    <option value="">Select Type</option>
+                    <option value="LOST">Lost</option>
+                    <option value="FOUND">Found</option>
+
+                </select>
+
+
+                <button type="submit">
+                    Report Item
+                </button>
+
+                <p id="message"></p>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+    <script src="js/report-item.js"></script>
+
+</body>
+
+</html>

@@ -1,5 +1,6 @@
 package com.lostfound.controller;
 
+import com.lostfound.dto.ClaimDTO;
 import com.lostfound.model.Claim;
 import com.lostfound.service.ClaimService;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class ClaimController {
     }
 
     @PostMapping
-    public ResponseEntity<Claim> createClaim(
+    public ResponseEntity<ClaimDTO> createClaim(
             @RequestBody Claim claim) {
 
         return ResponseEntity.ok(
@@ -28,7 +29,7 @@ public class ClaimController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Claim>> getAllClaims() {
+    public ResponseEntity<List<ClaimDTO>> getAllClaims() {
 
         return ResponseEntity.ok(
                 claimService.getAllClaims()
@@ -36,7 +37,7 @@ public class ClaimController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Claim> getClaimById(
+    public ResponseEntity<ClaimDTO> getClaimById(
             @PathVariable Long id) {
 
         return ResponseEntity.ok(
@@ -45,7 +46,7 @@ public class ClaimController {
     }
 
     @GetMapping("/item/{itemId}")
-    public ResponseEntity<List<Claim>> getClaimsByItem(
+    public ResponseEntity<List<ClaimDTO>> getClaimsByItem(
             @PathVariable Long itemId) {
 
         return ResponseEntity.ok(
@@ -54,7 +55,7 @@ public class ClaimController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Claim>> getClaimsByUser(
+    public ResponseEntity<List<ClaimDTO>> getClaimsByUser(
             @PathVariable Long userId) {
 
         return ResponseEntity.ok(
@@ -63,7 +64,7 @@ public class ClaimController {
     }
 
     @PutMapping("/{id}/accept")
-    public ResponseEntity<Claim> acceptClaim(
+    public ResponseEntity<ClaimDTO> acceptClaim(
             @PathVariable Long id) {
 
         return ResponseEntity.ok(
@@ -72,7 +73,7 @@ public class ClaimController {
     }
 
     @PutMapping("/{id}/reject")
-    public ResponseEntity<Claim> rejectClaim(
+    public ResponseEntity<ClaimDTO> rejectClaim(
             @PathVariable Long id) {
 
         return ResponseEntity.ok(

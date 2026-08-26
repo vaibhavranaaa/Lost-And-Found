@@ -3,22 +3,45 @@ import com.lostfound.model.ItemType;
 import com.lostfound.dto.ItemDTO;
 import com.lostfound.model.Item;
 import com.lostfound.model.ItemStatus;
+import com.lostfound.model.User;
+import com.lostfound.repository.ClaimRepository;
 import com.lostfound.repository.ItemRepository;
+import com.lostfound.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class ItemService {
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private final ItemRepository itemRepository;
+
+    @Autowired
+    private ClaimRepository claimRepository;
 
     public ItemService(ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
     }
 
     public Item createItem(Item item) {
-        item.setStatus(ItemStatus.ACTIVE);
+
+        if (item.getUser() == null || item.getUser().getId() == null) {
+            throw new RuntimeException("User ID is required");
+        }
+
+        Long userId = item.getUser().getId();
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        item.setUser(user);
+
         return itemRepository.save(item);
     }
 
@@ -53,10 +76,13 @@ public class ItemService {
         return itemRepository.save(item);
     }
 
+    @Transactional
     public void deleteItem(Long id) {
 
         Item item = itemRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Item not found"));
+
+        claimRepository.deleteByItemId(id);
 
         itemRepository.delete(item);
     }

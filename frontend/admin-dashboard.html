@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard - Lost & Found</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>Lost & Found - Admin</h1>
+
+        <nav>
+
+            <a href="admin-dashboard.html">Dashboard</a>
+            <a href="admin-items.html">Items</a>
+            <a href="admin-claims.html">Claims</a>
+            <a href="admin-users.html">Users</a>
+
+            <button id="logoutBtn">Logout</button>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <section>
+
+            <h2>Admin Dashboard</h2>
+
+            <p>
+                Manage users, lost and found items, and claims.
+            </p>
+
+        </section>
+
+
+        <section class="dashboard-cards">
+
+            <div class="card">
+
+                <h3>Manage Users</h3>
+
+                <p>
+                    View all registered users.
+                </p>
+
+                <a href="admin-users.html">
+                    View Users
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Manage Items</h3>
+
+                <p>
+                    View and manage lost and found items.
+                </p>
+
+                <a href="admin-items.html">
+                    View Items
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Manage Claims</h3>
+
+                <p>
+                    Review and process item claims.
+                </p>
+
+                <a href="admin-claims.html">
+                    View Claims
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>System Overview</h3>
+
+                <p>
+                    Manage the Lost & Found portal.
+                </p>
+
+                <a href="admin-items.html">
+                    Manage Portal
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        const role = localStorage.getItem("role");
+
+        if (role !== "ADMIN") {
+            window.location.href = "index.html";
+        }
+
+        document
+            .getElementById("logoutBtn")
+            .addEventListener("click", function () {
+
+                localStorage.removeItem("userId");
+                localStorage.removeItem("role");
+
+                window.location.href = "index.html";
+
+            });
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard - Lost & Found</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>Lost & Found - Admin</h1>
+
+        <nav>
+
+            <a href="admin-dashboard.html">Dashboard</a>
+
+            <a href="admin-items.html">Items</a>
+
+            <a href="admin-users.html">Users</a>
+
+            <a href="admin-claims.html">Claims</a>
+
+            <button id="logoutBtn">Logout</button>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <h2>Admin Dashboard</h2>
+
+        <div class="dashboard-cards">
+
+            <div class="dashboard-card">
+                <h3>Total Users</h3>
+                <p id="totalUsers">0</p>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Total Items</h3>
+                <p id="totalItems">0</p>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Active Items</h3>
+                <p id="activeItems">0</p>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Resolved Items</h3>
+                <p id="resolvedItems">0</p>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Pending Claims</h3>
+                <p id="pendingClaims">0</p>
+            </div>
+
+        </div>
+
+
+        <div class="admin-links">
+
+            <a href="admin-items.html">
+                Manage Items
+            </a>
+
+            <a href="admin-claims.html">
+                Manage Claims
+            </a>
+
+            <a href="admin-users.html">
+                Manage Users
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <script src="js/admin-dashboard.js"></script>
+
+</body>
+
+</html>

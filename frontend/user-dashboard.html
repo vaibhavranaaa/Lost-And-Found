@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>User Dashboard - Lost & Found</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>Lost & Found</h1>
+
+        <nav>
+
+            <a href="user-dashboard.html">Dashboard</a>
+            <a href="items.html">Items</a>
+            <a href="report-item.html">Report Item</a>
+            <a href="claims.html">My Claims</a>
+
+            <button id="logoutBtn">Logout</button>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <section>
+
+            <h2>Welcome to Lost & Found</h2>
+
+            <p>
+                Find lost items or report something you have lost or found.
+            </p>
+
+        </section>
+
+
+        <section class="dashboard-cards">
+
+            <div class="card">
+
+                <h3>Lost Items</h3>
+
+                <p>View items reported as lost.</p>
+
+                <a href="items.html?type=LOST">
+                    View Lost Items
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Found Items</h3>
+
+                <p>View items that have been found.</p>
+
+                <a href="items.html?type=FOUND">
+                    View Found Items
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Report Item</h3>
+
+                <p>Report a lost or found item.</p>
+
+                <a href="report-item.html">
+                    Report Item
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>My Claims</h3>
+
+                <p>Check the status of your claims.</p>
+
+                <a href="claims.html">
+                    View Claims
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        const role = localStorage.getItem("role");
+
+        if (role !== "USER") {
+            window.location.href = "index.html";
+        }
+
+        document
+            .getElementById("logoutBtn")
+            .addEventListener("click", function () {
+
+                localStorage.removeItem("userId");
+                localStorage.removeItem("role");
+
+                window.location.href = "index.html";
+
+            });
+
+    </script>
+
+</body>
+
+</html>
