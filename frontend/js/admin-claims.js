@@ -4,9 +4,16 @@ const claimsContainer =
 const message =
     document.getElementById("message");
 
+const emptyState =
+    document.getElementById("adminClaimsEmptyState");
+
 const role =
     localStorage.getItem("role");
 
+
+/* =========================================
+   ADMIN AUTHORIZATION
+   ========================================= */
 
 if (role !== "ADMIN") {
 
@@ -15,9 +22,15 @@ if (role !== "ADMIN") {
 }
 
 
+/* =========================================
+   LOAD CLAIMS
+   ========================================= */
+
 async function loadClaims() {
 
     try {
+
+        message.textContent = "";
 
         const response = await fetch(
             "http://localhost:8080/api/claims"
@@ -26,7 +39,9 @@ async function loadClaims() {
 
         if (!response.ok) {
 
-            throw new Error("Failed to load claims");
+            throw new Error(
+                "Failed to load claims"
+            );
 
         }
 
@@ -48,6 +63,10 @@ async function loadClaims() {
 }
 
 
+/* =========================================
+   GET ITEM
+   ========================================= */
+
 async function getItem(itemId) {
 
     try {
@@ -58,7 +77,9 @@ async function getItem(itemId) {
 
 
         if (!response.ok) {
+
             return null;
+
         }
 
 
@@ -76,15 +97,35 @@ async function getItem(itemId) {
 }
 
 
+/* =========================================
+   DISPLAY CLAIMS
+   ========================================= */
+
 async function displayClaims(claims) {
 
     claimsContainer.innerHTML = "";
 
 
-    if (claims.length === 0) {
+    if (emptyState) {
 
-        claimsContainer.innerHTML =
-            "<p>No claims found.</p>";
+        emptyState.style.display = "none";
+
+    }
+
+
+    if (!claims || claims.length === 0) {
+
+        if (emptyState) {
+
+            emptyState.style.display = "block";
+
+        } else {
+
+            claimsContainer.innerHTML = `
+                <p>No claims found.</p>
+            `;
+
+        }
 
         return;
 
@@ -98,10 +139,23 @@ async function displayClaims(claims) {
 
 
         const card =
-            document.createElement("div");
+            document.createElement("article");
 
-        card.className = "admin-claim-card";
+        card.className =
+            "admin-claim-card";
 
+
+        /* -----------------------------------------
+           Claim status
+           ----------------------------------------- */
+
+        const status =
+            (claim.status || "PENDING").toLowerCase();
+
+
+        /* -----------------------------------------
+           Action buttons
+           ----------------------------------------- */
 
         let buttons = "";
 
@@ -111,57 +165,132 @@ async function displayClaims(claims) {
             buttons = `
 
                 <button
+                    type="button"
+                    class="admin-claim-approve"
                     onclick="acceptClaim(${claim.id})">
-                    Accept
+
+                    ✓ Accept Claim
+
                 </button>
+
 
                 <button
+                    type="button"
+                    class="admin-claim-reject"
                     onclick="rejectClaim(${claim.id})">
-                    Reject
+
+                    ✕ Reject
+
                 </button>
 
+            `;
+
+        } else {
+
+            buttons = `
+                <span class="admin-claim-reviewed">
+                    ✓ Reviewed
+                </span>
             `;
 
         }
 
 
+        /* -----------------------------------------
+           Claim card
+           ----------------------------------------- */
+
         card.innerHTML = `
 
-            <h3>
-                ${item ? item.itemName : "Unknown Item"}
-            </h3>
+            <div class="admin-claim-card-top">
 
-            <p>
-                <strong>Claim ID:</strong>
-                ${claim.id}
-            </p>
+                <div class="admin-claim-icon">
+                    📋
+                </div>
 
-            <p>
-                <strong>Item ID:</strong>
-                ${claim.itemId}
-            </p>
 
-            <p>
-                <strong>User ID:</strong>
-                ${claim.userId}
-            </p>
-
-            <p>
-                <strong>Message:</strong>
-                ${claim.message}
-            </p>
-
-            <p>
-                <strong>Status:</strong>
-
-                <span class="claim-status ${claim.status.toLowerCase()}">
-                    ${claim.status}
+                <span class="admin-claim-status ${status}">
+                    ${claim.status || "PENDING"}
                 </span>
 
-            </p>
+            </div>
 
-            <div class="claim-actions">
+
+            <h3 class="admin-claim-title">
+
+                ${item
+                    ? item.itemName
+                    : "Unknown Item"}
+
+            </h3>
+
+
+            <div class="admin-claim-id">
+
+                Claim #${claim.id}
+
+            </div>
+
+
+            <div class="admin-claim-details">
+
+                <div class="admin-claim-detail">
+
+                    <span class="admin-claim-detail-icon">
+                        📦
+                    </span>
+
+                    <div class="admin-claim-detail-content">
+
+                        <small>Item ID</small>
+
+                        <strong>
+                            #${claim.itemId}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="admin-claim-detail">
+
+                    <span class="admin-claim-detail-icon">
+                        👤
+                    </span>
+
+                    <div class="admin-claim-detail-content">
+
+                        <small>User ID</small>
+
+                        <strong>
+                            #${claim.userId}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-claim-message">
+
+                <span class="admin-claim-message-label">
+                    Claim Message
+                </span>
+
+                <p>
+                    ${claim.message || "No message provided."}
+                </p>
+
+            </div>
+
+
+            <div class="admin-claim-card-footer">
+
                 ${buttons}
+
             </div>
 
         `;
@@ -174,13 +303,20 @@ async function displayClaims(claims) {
 }
 
 
+/* =========================================
+   ACCEPT CLAIM
+   ========================================= */
+
 async function acceptClaim(claimId) {
 
     const confirmed =
         confirm("Accept this claim?");
 
+
     if (!confirmed) {
+
         return;
+
     }
 
 
@@ -203,7 +339,10 @@ async function acceptClaim(claimId) {
         }
 
 
-        alert("Claim accepted successfully.");
+        alert(
+            "Claim accepted successfully."
+        );
+
 
         loadClaims();
 
@@ -212,20 +351,29 @@ async function acceptClaim(claimId) {
 
         console.error(error);
 
-        alert("Unable to accept claim.");
+        alert(
+            "Unable to accept claim."
+        );
 
     }
 
 }
 
 
+/* =========================================
+   REJECT CLAIM
+   ========================================= */
+
 async function rejectClaim(claimId) {
 
     const confirmed =
         confirm("Reject this claim?");
 
+
     if (!confirmed) {
+
         return;
+
     }
 
 
@@ -248,7 +396,10 @@ async function rejectClaim(claimId) {
         }
 
 
-        alert("Claim rejected successfully.");
+        alert(
+            "Claim rejected successfully."
+        );
+
 
         loadClaims();
 
@@ -257,23 +408,34 @@ async function rejectClaim(claimId) {
 
         console.error(error);
 
-        alert("Unable to reject claim.");
+        alert(
+            "Unable to reject claim."
+        );
 
     }
 
 }
 
 
+/* =========================================
+   LOGOUT
+   ========================================= */
+
 document
     .getElementById("logoutBtn")
     .addEventListener("click", function () {
 
         localStorage.removeItem("userId");
+
         localStorage.removeItem("role");
 
         window.location.href = "index.html";
 
     });
 
+
+/* =========================================
+   INITIAL LOAD
+   ========================================= */
 
 loadClaims();

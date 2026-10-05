@@ -2,39 +2,160 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Manage Claims - Lost & Found</title>
 
     <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
 
-    <header>
+    <!-- Admin Navigation -->
+    <header class="main-header admin-header">
 
-        <h1>Lost & Found - Admin</h1>
+        <a href="admin-dashboard.html" class="brand">
 
-        <nav>
-            <a href="admin-dashboard.html">Dashboard</a>
-            <a href="admin-items.html">Items</a>
-            <a href="admin-users.html">Users</a>
-            <a href="admin-claims.html">Claims</a>
+            <span class="brand-icon">🔎</span>
 
-            <button id="logoutBtn">Logout</button>
+            <span>Lost & Found</span>
+
+            <span class="admin-badge">
+                ADMIN
+            </span>
+
+        </a>
+
+
+        <nav class="main-nav">
+
+            <a href="admin-dashboard.html"
+               class="nav-link">
+                Dashboard
+            </a>
+
+            <a href="admin-items.html"
+               class="nav-link">
+                Items
+            </a>
+
+            <a href="admin-users.html"
+               class="nav-link">
+                Users
+            </a>
+
+            <a href="admin-claims.html"
+               class="nav-link active">
+                Claims
+            </a>
+
+            <button id="logoutBtn"
+                    class="logout-btn">
+                Logout
+            </button>
+
         </nav>
 
     </header>
 
 
-    <main>
+    <!-- Main Content -->
+    <main class="admin-claims-page">
 
-        <h2>Manage Claims</h2>
 
-        <p id="message"></p>
+        <!-- Page Hero -->
+        <section class="admin-claims-hero">
 
-        <div id="claimsContainer"></div>
+            <div>
+
+                <span class="section-label">
+                    ADMIN PORTAL
+                </span>
+
+                <h1>
+                    Manage Claims
+                </h1>
+
+                <p>
+                    Review ownership claims and manage
+                    claim requests submitted by users.
+                </p>
+
+            </div>
+
+
+            <div class="admin-claims-hero-icon">
+                📋
+            </div>
+
+        </section>
+
+
+        <!-- Claims Section -->
+        <section class="admin-claims-section">
+
+
+            <div class="admin-claims-section-header">
+
+                <div>
+
+                    <span class="admin-section-label">
+                        CLAIM MANAGEMENT
+                    </span>
+
+                    <h2>
+                        Submitted Claims
+                    </h2>
+
+                    <p>
+                        Review, approve, or reject claims
+                        submitted for reported items.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Message -->
+            <p id="message"
+               class="admin-claims-message">
+            </p>
+
+
+            <!-- Claims -->
+            <div id="claimsContainer"
+                 class="admin-claims-grid">
+            </div>
+
+
+            <!-- Empty State -->
+            <div id="adminClaimsEmptyState"
+                 class="admin-claims-empty-state"
+                 style="display: none;">
+
+                <div class="admin-claims-empty-icon">
+                    📋
+                </div>
+
+                <h3>
+                    No Claims Found
+                </h3>
+
+                <p>
+                    There are currently no claim requests
+                    waiting for admin review.
+                </p>
+
+            </div>
+
+
+        </section>
 
     </main>
 

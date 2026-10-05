@@ -5,7 +5,8 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Manage Users - Lost & Found</title>
 
@@ -15,31 +16,146 @@
 
 <body>
 
-    <header>
+    <!-- Admin Navigation -->
+    <header class="main-header admin-header">
 
-        <h1>Lost & Found - Admin</h1>
+        <a href="admin-dashboard.html" class="brand">
 
-        <nav>
+            <span class="brand-icon">🔎</span>
 
-            <a href="admin-dashboard.html">Dashboard</a>
-            <a href="admin-items.html">Items</a>
-            <a href="admin-users.html">Users</a>
-            <a href="admin-claims.html">Claims</a>
+            <span>Lost & Found</span>
 
-            <button id="logoutBtn">Logout</button>
+            <span class="admin-badge">
+                ADMIN
+            </span>
+
+        </a>
+
+
+        <nav class="main-nav">
+
+            <a href="admin-dashboard.html"
+               class="nav-link">
+                Dashboard
+            </a>
+
+            <a href="admin-items.html"
+               class="nav-link">
+                Items
+            </a>
+
+            <a href="admin-users.html"
+               class="nav-link active">
+                Users
+            </a>
+
+            <a href="admin-claims.html"
+               class="nav-link">
+                Claims
+            </a>
+
+            <button id="logoutBtn"
+                    class="logout-btn">
+                Logout
+            </button>
 
         </nav>
 
     </header>
 
 
-    <main>
+    <!-- Main Content -->
+    <main class="admin-users-page">
 
-        <h2>Manage Users</h2>
 
-        <p id="message"></p>
+        <!-- Page Hero -->
+        <section class="admin-users-hero">
 
-        <div id="usersContainer"></div>
+            <div>
+
+                <span class="section-label">
+                    ADMIN PORTAL
+                </span>
+
+                <h1>
+                    Manage Users
+                </h1>
+
+                <p>
+                    View and manage registered users
+                    on the Lost & Found platform.
+                </p>
+
+            </div>
+
+
+            <div class="admin-users-hero-icon">
+                👥
+            </div>
+
+        </section>
+
+
+        <!-- Users Section -->
+        <section class="admin-users-section">
+
+
+            <div class="admin-users-section-header">
+
+                <div>
+
+                    <span class="admin-section-label">
+                        USER MANAGEMENT
+                    </span>
+
+                    <h2>
+                        Registered Users
+                    </h2>
+
+                    <p>
+                        Review user accounts and
+                        manage platform access.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Message -->
+            <p id="message"
+               class="admin-users-message">
+            </p>
+
+
+            <!-- Users -->
+            <div id="usersContainer"
+                 class="admin-users-grid">
+            </div>
+
+
+            <!-- Empty State -->
+            <div id="adminUsersEmptyState"
+                 class="admin-users-empty-state"
+                 style="display: none;">
+
+                <div class="admin-users-empty-icon">
+                    👥
+                </div>
+
+                <h3>
+                    No Users Found
+                </h3>
+
+                <p>
+                    There are currently no registered
+                    users to display.
+                </p>
+
+            </div>
+
+
+        </section>
 
     </main>
 

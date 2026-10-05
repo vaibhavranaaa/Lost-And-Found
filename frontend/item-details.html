@@ -15,37 +15,123 @@
 
 <body>
 
-    <header>
+    <!-- Navigation -->
+    <header class="main-header">
 
-        <h1>Lost & Found</h1>
+        <a href="user-dashboard.html" class="brand">
 
-        <nav>
+            <span class="brand-icon">🔎</span>
 
-            <a href="user-dashboard.html">Dashboard</a>
-            <a href="items.html">Items</a>
-            <a href="report-item.html">Report Item</a>
-            <a href="claims.html">My Claims</a>
+            <span>Lost & Found</span>
 
-            <button id="logoutBtn">Logout</button>
+        </a>
+
+
+        <nav class="main-nav">
+
+            <a
+                href="user-dashboard.html"
+                class="nav-link">
+                Dashboard
+            </a>
+
+            <a
+                href="items.html"
+                class="nav-link active">
+                Items
+            </a>
+
+            <a
+                href="report-item.html"
+                class="nav-link">
+                Report Item
+            </a>
+
+            <a
+                href="claims.html"
+                class="nav-link">
+                My Claims
+            </a>
+
+            <button
+                id="logoutBtn"
+                class="logout-btn">
+                Logout
+            </button>
 
         </nav>
 
     </header>
 
 
-    <main>
+    <!-- Main Content -->
+    <main class="item-details-page">
 
-        <div id="message"></div>
 
-        <div id="itemDetails" class="details-card"></div>
+        <!-- Message -->
+        <div
+            id="message"
+            class="item-details-message">
+        </div>
 
-        <div id="claimSection" class="claim-box">
 
-            <h2>Claim This Item</h2>
+        <!-- Back Link -->
+        <a
+            href="items.html"
+            class="back-to-items">
+            ← Back to Items
+        </a>
 
-            <p>
-                If this item belongs to you, explain why you are claiming it.
+
+        <!-- Item Details -->
+        <section
+            id="itemDetails"
+            class="details-card">
+        </section>
+
+
+        <!-- Claim Section -->
+        <section
+            id="claimSection"
+            class="claim-box">
+
+
+            <div class="claim-box-header">
+
+                <div class="claim-icon">
+                    🤝
+                </div>
+
+                <div>
+
+                    <span class="claim-label">
+                        ITEM CLAIM
+                    </span>
+
+                    <h2>
+                        Claim This Item
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <p class="claim-description">
+
+                If this item belongs to you, explain why you are
+                claiming it. Provide enough information to help
+                verify your ownership.
+
             </p>
+
+
+            <label
+                for="claimMessage"
+                class="claim-input-label">
+                Your Message
+            </label>
+
 
             <textarea
                 id="claimMessage"
@@ -53,13 +139,34 @@
                 placeholder="Explain why this item belongs to you..."
             ></textarea>
 
-            <button id="claimBtn">
-                Submit Claim
-            </button>
 
-            <p id="claimMessageResult"></p>
+            <div class="claim-form-footer">
 
-        </div>
+                <span class="claim-hint">
+                    💡 Be specific about identifying details.
+                </span>
+
+
+                <button
+                    id="claimBtn"
+                    class="claim-submit-btn">
+
+                    Submit Claim
+                    <span>→</span>
+
+                </button>
+
+            </div>
+
+
+            <p
+                id="claimMessageResult"
+                class="claim-result">
+            </p>
+
+
+        </section>
+
 
     </main>
 

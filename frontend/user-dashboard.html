@@ -3,122 +3,431 @@
 
 <head>
 
+    <!-- Basic page settings -->
     <meta charset="UTF-8">
 
+    <!-- Responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>User Dashboard - Lost & Found</title>
+    <title>User Dashboard | Lost & Found</title>
 
+    <!-- Main stylesheet -->
     <link rel="stylesheet" href="css/style.css">
 
 </head>
 
 <body>
 
-    <header>
+    <!-- =========================================
+         NAVIGATION BAR
+    ========================================== -->
 
-        <h1>Lost & Found</h1>
+    <header class="main-header">
 
-        <nav>
+        <!-- Application logo/name -->
+        <a href="user-dashboard.html" class="brand">
+            <span class="brand-symbol">🔎</span>
+            <span>Lost & Found</span>
+        </a>
 
-            <a href="user-dashboard.html">Dashboard</a>
-            <a href="items.html">Items</a>
-            <a href="report-item.html">Report Item</a>
-            <a href="claims.html">My Claims</a>
 
-            <button id="logoutBtn">Logout</button>
+        <!-- Navigation links -->
+        <nav class="main-nav">
+
+            <a
+                href="user-dashboard.html"
+                class="nav-link active"
+            >
+                Dashboard
+            </a>
+
+            <a
+                href="items.html"
+                class="nav-link"
+            >
+                Items
+            </a>
+
+            <a
+                href="report-item.html"
+                class="nav-link"
+            >
+                Report Item
+            </a>
+
+            <a
+                href="claims.html"
+                class="nav-link"
+            >
+                My Claims
+            </a>
+
+            <button
+                type="button"
+                id="logoutBtn"
+                class="logout-btn"
+            >
+                Logout
+            </button>
 
         </nav>
 
     </header>
 
 
-    <main>
+    <!-- =========================================
+         MAIN DASHBOARD
+    ========================================== -->
 
-        <section>
+    <main class="dashboard-container">
 
-            <h2>Welcome to Lost & Found</h2>
 
-            <p>
-                Find lost items or report something you have lost or found.
-            </p>
+        <!-- =====================================
+             WELCOME SECTION
+        ====================================== -->
+
+        <section class="dashboard-welcome">
+
+            <div>
+
+                <span class="welcome-label">
+                    USER DASHBOARD
+                </span>
+
+                <h1>
+                    Welcome to Lost & Found 👋
+                </h1>
+
+                <p>
+                    Find lost items, report belongings,
+                    and help reunite people with what matters.
+                </p>
+
+            </div>
+
+
+            <!-- Quick report button -->
+            <a
+                href="report-item.html"
+                class="dashboard-primary-btn"
+            >
+                + Report an Item
+            </a>
 
         </section>
 
+
+        <!-- =====================================
+             STATISTICS / QUICK CARDS
+        ====================================== -->
 
         <section class="dashboard-cards">
 
-            <div class="card">
 
-                <h3>Lost Items</h3>
+            <!-- Lost Items -->
+            <article class="dashboard-card">
 
-                <p>View items reported as lost.</p>
+                <div class="dashboard-card-icon lost-icon">
+                    🔍
+                </div>
 
-                <a href="items.html?type=LOST">
-                    View Lost Items
-                </a>
+                <div class="dashboard-card-content">
+
+                    <h3>Lost Items</h3>
+
+                    <p>
+                        Browse items reported as lost.
+                    </p>
+
+                    <a href="items.html?type=LOST">
+                        View Lost Items →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- Found Items -->
+            <article class="dashboard-card">
+
+                <div class="dashboard-card-icon found-icon">
+                    ✓
+                </div>
+
+                <div class="dashboard-card-content">
+
+                    <h3>Found Items</h3>
+
+                    <p>
+                        Browse items that have been found.
+                    </p>
+
+                    <a href="items.html?type=FOUND">
+                        View Found Items →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- Report Item -->
+            <article class="dashboard-card">
+
+                <div class="dashboard-card-icon report-icon">
+                    +
+                </div>
+
+                <div class="dashboard-card-content">
+
+                    <h3>Report Item</h3>
+
+                    <p>
+                        Report something you lost or found.
+                    </p>
+
+                    <a href="report-item.html">
+                        Report Item →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- Claims -->
+            <article class="dashboard-card">
+
+                <div class="dashboard-card-icon claims-icon">
+                    📋
+                </div>
+
+                <div class="dashboard-card-content">
+
+                    <h3>My Claims</h3>
+
+                    <p>
+                        Check the status of your submitted claims.
+                    </p>
+
+                    <a href="claims.html">
+                        View Claims →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+        </section>
+
+
+        <!-- =====================================
+             QUICK ACTIONS
+        ====================================== -->
+
+        <section class="quick-actions">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        QUICK ACTIONS
+                    </span>
+
+                    <h2>
+                        What would you like to do?
+                    </h2>
+
+                </div>
 
             </div>
 
 
-            <div class="card">
+            <div class="action-grid">
 
-                <h3>Found Items</h3>
 
-                <p>View items that have been found.</p>
+                <!-- Browse lost items -->
+                <a
+                    href="items.html?type=LOST"
+                    class="action-card"
+                >
 
-                <a href="items.html?type=FOUND">
-                    View Found Items
+                    <span class="action-icon">
+                        🔍
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Find a Lost Item
+                        </h3>
+
+                        <p>
+                            Search through items reported as lost.
+                        </p>
+
+                    </div>
+
+                    <span class="action-arrow">
+                        →
+                    </span>
+
                 </a>
 
-            </div>
 
+                <!-- Browse found items -->
+                <a
+                    href="items.html?type=FOUND"
+                    class="action-card"
+                >
 
-            <div class="card">
+                    <span class="action-icon">
+                        📦
+                    </span>
 
-                <h3>Report Item</h3>
+                    <div>
 
-                <p>Report a lost or found item.</p>
+                        <h3>
+                            Browse Found Items
+                        </h3>
 
-                <a href="report-item.html">
-                    Report Item
+                        <p>
+                            See items that have been found.
+                        </p>
+
+                    </div>
+
+                    <span class="action-arrow">
+                        →
+                    </span>
+
                 </a>
 
-            </div>
 
+                <!-- Report item -->
+                <a
+                    href="report-item.html"
+                    class="action-card"
+                >
 
-            <div class="card">
+                    <span class="action-icon">
+                        📝
+                    </span>
 
-                <h3>My Claims</h3>
+                    <div>
 
-                <p>Check the status of your claims.</p>
+                        <h3>
+                            Report an Item
+                        </h3>
 
-                <a href="claims.html">
-                    View Claims
+                        <p>
+                            Report a lost or found belonging.
+                        </p>
+
+                    </div>
+
+                    <span class="action-arrow">
+                        →
+                    </span>
+
                 </a>
+
+
+                <!-- Claims -->
+                <a
+                    href="claims.html"
+                    class="action-card"
+                >
+
+                    <span class="action-icon">
+                        📋
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Track My Claims
+                        </h3>
+
+                        <p>
+                            Check your existing claim requests.
+                        </p>
+
+                    </div>
+
+                    <span class="action-arrow">
+                        →
+                    </span>
+
+                </a>
+
 
             </div>
 
         </section>
+
+
+        <!-- =====================================
+             INFORMATION SECTION
+        ====================================== -->
+
+        <section class="dashboard-info">
+
+            <div class="info-icon">
+                💡
+            </div>
+
+            <div>
+
+                <h3>
+                    How Lost & Found works
+                </h3>
+
+                <p>
+                    Report a lost or found item, browse available
+                    items, and submit a claim when you recognize
+                    something that belongs to you.
+                </p>
+
+            </div>
+
+        </section>
+
 
     </main>
 
 
+    <!-- =========================================
+         EXISTING AUTHENTICATION LOGIC
+    ========================================== -->
+
     <script>
 
+        // Get the current user's role
         const role = localStorage.getItem("role");
 
+
+        // Only USER accounts can access this dashboard
         if (role !== "USER") {
+
             window.location.href = "index.html";
+
         }
 
+
+        // Logout functionality
         document
             .getElementById("logoutBtn")
             .addEventListener("click", function () {
 
+                // Remove stored user information
                 localStorage.removeItem("userId");
                 localStorage.removeItem("role");
 
+                // Return to login page
                 window.location.href = "index.html";
 
             });

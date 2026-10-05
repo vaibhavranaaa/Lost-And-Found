@@ -4,9 +4,16 @@ const usersContainer =
 const message =
     document.getElementById("message");
 
+const emptyState =
+    document.getElementById("adminUsersEmptyState");
+
 const role =
     localStorage.getItem("role");
 
+
+/* =========================================
+   ADMIN AUTHORIZATION
+   ========================================= */
 
 if (role !== "ADMIN") {
 
@@ -15,23 +22,34 @@ if (role !== "ADMIN") {
 }
 
 
+/* =========================================
+   LOAD USERS
+   ========================================= */
+
 async function loadUsers() {
 
     try {
+
+        message.textContent = "";
 
         const response = await fetch(
             "http://localhost:8080/api/users"
         );
 
+
         if (!response.ok) {
 
-            throw new Error("Failed to load users");
+            throw new Error(
+                "Failed to load users"
+            );
 
         }
+
 
         const users = await response.json();
 
         displayUsers(users);
+
 
     } catch (error) {
 
@@ -45,15 +63,35 @@ async function loadUsers() {
 }
 
 
+/* =========================================
+   DISPLAY USERS
+   ========================================= */
+
 function displayUsers(users) {
 
     usersContainer.innerHTML = "";
 
 
-    if (users.length === 0) {
+    if (emptyState) {
 
-        usersContainer.innerHTML =
-            "<p>No users found.</p>";
+        emptyState.style.display = "none";
+
+    }
+
+
+    if (!users || users.length === 0) {
+
+        if (emptyState) {
+
+            emptyState.style.display = "block";
+
+        } else {
+
+            usersContainer.innerHTML = `
+                <p>No users found.</p>
+            `;
+
+        }
 
         return;
 
@@ -63,46 +101,135 @@ function displayUsers(users) {
     users.forEach(function (user) {
 
         const card =
-            document.createElement("div");
+            document.createElement("article");
 
         card.className = "admin-user-card";
 
 
+        /* -----------------------------------------
+           Role
+           ----------------------------------------- */
+
+        const userRole =
+            user.role || "USER";
+
+        const roleClass =
+            userRole.toLowerCase();
+
+
+        /* -----------------------------------------
+           Actions
+           ----------------------------------------- */
+
+        let actions = "";
+
+
+        if (userRole !== "ADMIN") {
+
+            actions = `
+
+                <button
+                    type="button"
+                    class="admin-user-delete"
+                    onclick="deleteUser(${user.id})">
+
+                    Delete User
+
+                </button>
+
+            `;
+
+        } else {
+
+            actions = `
+
+                <span class="admin-admin-account">
+                    🛡️ Admin Account
+                </span>
+
+            `;
+
+        }
+
+
+        /* -----------------------------------------
+           Card
+           ----------------------------------------- */
+
         card.innerHTML = `
 
-            <h3>${user.name}</h3>
+            <div class="admin-user-card-top">
 
-            <p>
-                <strong>ID:</strong>
-                ${user.id}
-            </p>
+                <div class="admin-user-avatar">
+                    👤
+                </div>
 
-            <p>
-                <strong>Email:</strong>
-                ${user.email}
-            </p>
+                <span class="admin-user-role ${roleClass}">
+                    ${userRole}
+                </span>
 
-            <p>
-                <strong>Role:</strong>
-                ${user.role}
-            </p>
+            </div>
 
-            <div class="user-actions">
 
-                ${
-                    user.role !== "ADMIN"
-                    ?
-                    `
-                    <button
-                        onclick="deleteUser(${user.id})">
-                        Delete User
-                    </button>
-                    `
-                    :
-                    `
-                    <span>Admin Account</span>
-                    `
-                }
+            <h3 class="admin-user-name">
+                ${user.name || "Unnamed User"}
+            </h3>
+
+
+            <div class="admin-user-details">
+
+                <div class="admin-user-detail">
+
+                    <div class="admin-user-detail-icon">
+                        🆔
+                    </div>
+
+                    <div class="admin-user-detail-content">
+
+                        <small>User ID</small>
+
+                        <strong>
+                            #${user.id}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="admin-user-detail">
+
+                    <div class="admin-user-detail-icon">
+                        ✉️
+                    </div>
+
+                    <div class="admin-user-detail-content">
+
+                        <small>Email Address</small>
+
+                        <strong>
+                            ${user.email || "Not available"}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-user-card-footer">
+
+                <span class="admin-user-status">
+                    Active Account
+                </span>
+
+
+                <div class="admin-user-actions">
+
+                    ${actions}
+
+                </div>
 
             </div>
 
@@ -116,6 +243,10 @@ function displayUsers(users) {
 }
 
 
+/* =========================================
+   DELETE USER
+   ========================================= */
+
 async function deleteUser(userId) {
 
     const confirmed =
@@ -123,8 +254,11 @@ async function deleteUser(userId) {
             "Are you sure you want to delete this user?"
         );
 
+
     if (!confirmed) {
+
         return;
+
     }
 
 
@@ -147,7 +281,9 @@ async function deleteUser(userId) {
         }
 
 
-        alert("User deleted successfully.");
+        alert(
+            "User deleted successfully."
+        );
 
         loadUsers();
 
@@ -166,6 +302,10 @@ async function deleteUser(userId) {
 }
 
 
+/* =========================================
+   LOGOUT
+   ========================================= */
+
 document
     .getElementById("logoutBtn")
     .addEventListener("click", function () {
@@ -178,5 +318,9 @@ document
 
     });
 
+
+/* =========================================
+   INITIAL LOAD
+   ========================================= */
 
 loadUsers();

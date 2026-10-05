@@ -12,29 +12,109 @@
 
 <body>
 
-    <header>
+    <!-- Navigation -->
+    <header class="main-header">
 
-        <h1>Lost & Found</h1>
+        <a href="user-dashboard.html" class="brand">
+            <span class="brand-icon">🔎</span>
+            <span>Lost & Found</span>
+        </a>
 
-        <nav>
-            <a href="user-dashboard.html">Dashboard</a>
-            <a href="items.html">Items</a>
-            <a href="report-item.html">Report Item</a>
-            <a href="claims.html">My Claims</a>
+        <nav class="main-nav">
 
-            <button id="logoutBtn">Logout</button>
+            <a href="user-dashboard.html" class="nav-link">
+                Dashboard
+            </a>
+
+            <a href="items.html" class="nav-link">
+                Items
+            </a>
+
+            <a href="report-item.html" class="nav-link">
+                Report Item
+            </a>
+
+            <a href="claims.html" class="nav-link active">
+                My Claims
+            </a>
+
+            <button id="logoutBtn" class="logout-btn">
+                Logout
+            </button>
+
         </nav>
 
     </header>
 
 
-    <main>
+    <!-- Main Content -->
+    <main class="claims-page">
 
-        <h2>My Claims</h2>
+        <!-- Page Header -->
+        <section class="claims-header">
 
-        <p id="message"></p>
+            <span class="section-label">
+                MY ACTIVITY
+            </span>
 
-        <div id="claimsContainer" class="claims-grid"></div>
+            <h1>My Claims</h1>
+
+            <p>
+                Track the items you have claimed and their current status.
+            </p>
+
+        </section>
+
+
+        <!-- Message -->
+        <p id="message" class="claims-message"></p>
+
+
+        <!-- Claims -->
+        <section class="claims-section">
+
+            <div class="claims-section-header">
+
+                <div>
+                    <h2>Your Claims</h2>
+
+                    <p>
+                        Items you have requested to claim.
+                    </p>
+                </div>
+
+                <a href="items.html" class="browse-items-btn">
+                    Browse Items
+                </a>
+
+            </div>
+
+
+            <!-- JavaScript will insert claim cards here -->
+            <div id="claimsContainer" class="claims-grid"></div>
+
+        </section>
+
+
+        <!-- Empty State -->
+        <div id="claimsEmptyState" class="claims-empty-state">
+
+            <div class="empty-icon">
+                📋
+            </div>
+
+            <h3>No claims yet</h3>
+
+            <p>
+                You haven't claimed any items yet.
+                Browse available items to find something that belongs to you.
+            </p>
+
+            <a href="items.html" class="browse-items-btn">
+                Browse Items
+            </a>
+
+        </div>
 
     </main>
 

@@ -2,56 +2,133 @@
 <html lang="en">
 
 <head>
+
+    <!-- Basic page settings -->
     <meta charset="UTF-8">
+
+    <!-- Makes the page responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Lost & Found - Login</title>
+    <title>Login | Lost & Found</title>
 
+    <!-- Main CSS file -->
     <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
 
-<div class="container">
+    <!-- =========================================
+         LOGIN PAGE
+    ========================================== -->
 
-    <div class="login-box">
+    <main class="auth-page">
 
-        <h1>Lost & Found</h1>
+        <!-- Login card -->
+        <section class="auth-card">
 
-        <p>Login to your account</p>
+            <!-- =====================================
+                 HEADER
+            ====================================== -->
 
-        <form id="loginForm">
+            <div class="auth-header">
 
-            <label for="email">Email</label>
-            <input
-                type="email"
-                id="email"
-                required
+                <!-- Application icon -->
+                <div class="brand-icon">
+                    🔎
+                </div>
+
+                <h1>Lost & Found</h1>
+
+                <p>
+                    Welcome back! Login to continue.
+                </p>
+
+            </div>
+
+
+            <!-- =====================================
+                 LOGIN FORM
+            ====================================== -->
+
+            <form id="loginForm" class="auth-form">
+
+                <!-- Email -->
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Password -->
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Login button -->
+                <button
+                    type="submit"
+                    class="primary-btn"
+                >
+                    Login
+                </button>
+
+
+                <!-- Login success/error message -->
+                <p
+                    id="message"
+                    class="form-message"
+                ></p>
+
+            </form>
+
+
+            <!-- =====================================
+                 REGISTER LINK
+            ====================================== -->
+
+            <div class="auth-divider">
+                Don't have an account?
+            </div>
+
+            <a
+                href="register.html"
+                class="secondary-btn"
             >
+                Create an Account
+            </a>
 
-            <label for="password">Password</label>
-            <input
-                type="password"
-                id="password"
-                required
-            >
+        </section>
 
-            <button type="submit">Login</button>
+    </main>
 
-        </form>
 
-        <p id="message"></p>
-
-        <p>
-            Don't have an account?
-            <a href="register.html">Register</a>
-        </p>
-
-    </div>
-
-</div>
-
-<script src="js/login.js"></script>
+    <!-- Login JavaScript -->
+    <script src="js/login.js"></script>
 
 </body>
 

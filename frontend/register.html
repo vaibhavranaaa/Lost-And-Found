@@ -3,71 +3,140 @@
 
 <head>
 
+    <!-- Basic page settings -->
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <!-- Responsive layout -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Lost & Found - Register</title>
+    <title>Register | Lost & Found</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <!-- Main CSS file -->
+    <link rel="stylesheet" href="./css/style.css">
 
 </head>
 
 <body>
 
-    <div class="container">
+    <!-- =========================================
+         REGISTER PAGE
+    ========================================== -->
 
-        <div class="login-box">
+    <main class="auth-page">
 
-            <h1>Lost & Found</h1>
+        <!-- Registration card -->
+        <section class="auth-card">
 
-            <p>Create your account</p>
+            <!-- Header -->
+            <div class="auth-header">
 
-            <form id="registerForm">
+                <div class="brand-icon">
+                    🔎
+                </div>
 
-                <label for="name">Name</label>
+                <h1>Lost & Found</h1>
 
-                <input
-                    type="text"
-                    id="name"
-                    required
+                <p>
+                    Create your account and get started.
+                </p>
+
+            </div>
+
+
+            <!-- Registration form -->
+            <form id="registerForm" class="auth-form">
+
+                <!-- Name -->
+                <div class="form-group">
+
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Email -->
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Password -->
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Create a password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Submit button -->
+                <button
+                    type="submit"
+                    class="primary-btn"
                 >
-
-                <label for="email">Email</label>
-
-                <input
-                    type="email"
-                    id="email"
-                    required
-                >
-
-                <label for="password">Password</label>
-
-                <input
-                    type="password"
-                    id="password"
-                    required
-                >
-
-                <button type="submit">
-                    Sign Up
+                    Create Account
                 </button>
 
-                <p id="message"></p>
+
+                <!-- Message from JavaScript -->
+                <p
+                    id="message"
+                    class="form-message"
+                ></p>
 
             </form>
 
-            <p>
-                Already have an account?
-                <a href="login.html">Login</a>
-            </p>
 
-        </div>
+            <!-- Login section -->
+            <div class="auth-divider">
+                <span>Already have an account?</span>
+            </div>
 
-    </div>
+            <a
+                href="./index.html"
+                class="secondary-btn"
+            >
+                Login to Your Account
+            </a>
 
-    <script src="js/register.js"></script>
+        </section>
+
+    </main>
+
+
+    <!-- Register JavaScript -->
+    <script src="./js/register.js"></script>
 
 </body>
 

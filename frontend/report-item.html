@@ -2,116 +2,361 @@
 <html lang="en">
 
 <head>
+
+    <!-- Basic page settings -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Report Item - Lost & Found</title>
+    <!-- Responsive design -->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
+    <title>Report Item | Lost & Found</title>
+
+    <!-- Main CSS -->
     <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
 
-    <header>
 
-        <h1>Lost & Found</h1>
+    <!-- =========================================
+         NAVIGATION BAR
+    ========================================== -->
 
-        <nav>
-            <a href="user-dashboard.html">Dashboard</a>
-            <a href="items.html">Items</a>
-            <a href="report-item.html">Report Item</a>
-            <a href="claims.html">My Claims</a>
+    <header class="main-header">
 
-            <button id="logoutBtn">Logout</button>
+        <!-- Application brand -->
+        <a
+            href="user-dashboard.html"
+            class="brand"
+        >
+
+            <span class="brand-symbol">
+                🔎
+            </span>
+
+            <span>
+                Lost & Found
+            </span>
+
+        </a>
+
+
+        <!-- Navigation links -->
+        <nav class="main-nav">
+
+            <a
+                href="user-dashboard.html"
+                class="nav-link"
+            >
+                Dashboard
+            </a>
+
+            <a
+                href="items.html"
+                class="nav-link"
+            >
+                Items
+            </a>
+
+            <a
+                href="report-item.html"
+                class="nav-link active"
+            >
+                Report Item
+            </a>
+
+            <a
+                href="claims.html"
+                class="nav-link"
+            >
+                My Claims
+            </a>
+
+            <button
+                type="button"
+                id="logoutBtn"
+                class="logout-btn"
+            >
+                Logout
+            </button>
+
         </nav>
 
     </header>
 
 
-    <main>
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
 
-        <div class="form-card">
+    <main class="report-page">
 
-            <h2>Report Lost / Found Item</h2>
+
+        <!-- =====================================
+             PAGE INTRODUCTION
+        ====================================== -->
+
+        <section class="report-header">
+
+            <span class="section-label">
+                REPORT AN ITEM
+            </span>
+
+            <h1>
+                Help Reunite an Item With Its Owner
+            </h1>
 
             <p>
-                Enter the details of the item below.
+                Tell us about the item you lost or found.
+                Providing accurate details will make it
+                easier to identify and recover the item.
             </p>
 
-            <form id="itemForm">
-
-                <label for="itemName">Item Name</label>
-
-                <input
-                    type="text"
-                    id="itemName"
-                    placeholder="Example: Black Wallet"
-                    required
-                >
+        </section>
 
 
-                <label for="category">Category</label>
+        <!-- =====================================
+             REPORT FORM CARD
+        ====================================== -->
 
-                <input
-                    type="text"
-                    id="category"
-                    placeholder="Example: Accessories"
-                    required
-                >
+        <section class="report-card">
 
 
-                <label for="description">Description</label>
+            <!-- Form heading -->
 
-                <textarea
-                    id="description"
-                    rows="5"
-                    placeholder="Describe the item..."
-                    required
-                ></textarea>
+            <div class="report-card-header">
 
+                <div class="report-form-icon">
+                    📝
+                </div>
 
-                <label for="location">Location</label>
+                <div>
 
-                <input
-                    type="text"
-                    id="location"
-                    placeholder="Example: Sharda University"
-                    required
-                >
+                    <h2>
+                        Item Details
+                    </h2>
 
+                    <p>
+                        Please provide the following information.
+                    </p>
 
-                <label for="date">Date</label>
+                </div>
 
-                <input
-                    type="date"
-                    id="date"
-                    required
-                >
+            </div>
 
 
-                <label for="type">Type</label>
+            <!-- =================================
+                 ITEM FORM
+            ================================== -->
 
-                <select id="type" required>
-
-                    <option value="">Select Type</option>
-                    <option value="LOST">Lost</option>
-                    <option value="FOUND">Found</option>
-
-                </select>
+            <form
+                id="itemForm"
+                class="report-form"
+            >
 
 
-                <button type="submit">
-                    Report Item
-                </button>
+                <!-- Item name -->
 
-                <p id="message"></p>
+                <div class="form-field">
+
+                    <label for="itemName">
+                        Item Name
+                        <span>*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="itemName"
+                        placeholder="Example: Black Wallet"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Category -->
+
+                <div class="form-field">
+
+                    <label for="category">
+                        Category
+                        <span>*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="category"
+                        placeholder="Example: Accessories"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Description -->
+
+                <div class="form-field full-width">
+
+                    <label for="description">
+                        Description
+                        <span>*</span>
+                    </label>
+
+                    <textarea
+                        id="description"
+                        rows="5"
+                        placeholder="Describe the item's color, brand, identifying marks, or other useful details..."
+                        required
+                    ></textarea>
+
+                    <small>
+                        Include details that could help identify the item.
+                    </small>
+
+                </div>
+
+
+                <!-- Location -->
+
+                <div class="form-field">
+
+                    <label for="location">
+                        Location
+                        <span>*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        placeholder="Example: Sharda University"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Date -->
+
+                <div class="form-field">
+
+                    <label for="date">
+                        Date
+                        <span>*</span>
+                    </label>
+
+                    <input
+                        type="date"
+                        id="date"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Type -->
+
+                <div class="form-field full-width">
+
+                    <label for="type">
+                        What happened?
+                        <span>*</span>
+                    </label>
+
+                    <select
+                        id="type"
+                        required
+                    >
+
+                        <option value="">
+                            Select an option
+                        </option>
+
+                        <option value="LOST">
+                            I Lost This Item
+                        </option>
+
+                        <option value="FOUND">
+                            I Found This Item
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- =================================
+                     FORM ACTIONS
+                ================================== -->
+
+                <div class="report-form-actions">
+
+                    <a
+                        href="items.html"
+                        class="cancel-btn"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="submit-report-btn"
+                    >
+                        Report Item
+                    </button>
+
+                </div>
+
+
+                <!-- JavaScript message -->
+
+                <p
+                    id="message"
+                    class="form-message"
+                ></p>
+
 
             </form>
 
-        </div>
+        </section>
+
+
+        <!-- =====================================
+             HELPFUL TIP
+        ====================================== -->
+
+        <section class="report-tip">
+
+            <div class="tip-icon">
+                💡
+            </div>
+
+            <div>
+
+                <h3>
+                    Tip for better results
+                </h3>
+
+                <p>
+                    Be as specific as possible. Mention the
+                    item's color, brand, model, unique marks,
+                    and exact location whenever possible.
+                </p>
+
+            </div>
+
+        </section>
+
 
     </main>
 
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
 
     <script src="js/report-item.js"></script>
 

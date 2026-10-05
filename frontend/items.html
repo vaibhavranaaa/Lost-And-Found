@@ -3,80 +3,338 @@
 
 <head>
 
+    <!-- Basic page settings -->
     <meta charset="UTF-8">
 
+    <!-- Responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Items - Lost & Found</title>
+    <title>Items | Lost & Found</title>
 
+    <!-- Main CSS file -->
     <link rel="stylesheet" href="css/style.css">
 
 </head>
 
 <body>
 
-    <header>
 
-        <h1>Lost & Found</h1>
+    <!-- =========================================
+         NAVIGATION BAR
+    ========================================== -->
 
-        <nav>
+    <header class="main-header">
 
-            <a href="user-dashboard.html">Dashboard</a>
-            <a href="items.html">Items</a>
-            <a href="report-item.html">Report Item</a>
-            <a href="claims.html">My Claims</a>
+        <!-- Application brand -->
+        <a
+            href="user-dashboard.html"
+            class="brand"
+        >
 
-            <button id="logoutBtn">Logout</button>
+            <span class="brand-symbol">
+                🔎
+            </span>
+
+            <span>
+                Lost & Found
+            </span>
+
+        </a>
+
+
+        <!-- Navigation -->
+        <nav class="main-nav">
+
+            <a
+                href="user-dashboard.html"
+                class="nav-link"
+            >
+                Dashboard
+            </a>
+
+            <a
+                href="items.html"
+                class="nav-link active"
+            >
+                Items
+            </a>
+
+            <a
+                href="report-item.html"
+                class="nav-link"
+            >
+                Report Item
+            </a>
+
+            <a
+                href="claims.html"
+                class="nav-link"
+            >
+                My Claims
+            </a>
+
+            <button
+                type="button"
+                id="logoutBtn"
+                class="logout-btn"
+            >
+                Logout
+            </button>
 
         </nav>
 
     </header>
 
 
-    <main>
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
 
-        <h2>Lost & Found Items</h2>
+    <main class="items-page">
 
-        <div class="filters">
 
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search items..."
+        <!-- =====================================
+             PAGE HEADER
+        ====================================== -->
+
+        <section class="items-hero">
+
+            <div>
+
+                <span class="section-label">
+                    LOST & FOUND
+                </span>
+
+                <h1>
+                    Find What You're Looking For
+                </h1>
+
+                <p>
+                    Browse reported lost and found items
+                    and help reunite them with their owners.
+                </p>
+
+            </div>
+
+
+            <!-- Report button -->
+
+            <a
+                href="report-item.html"
+                class="dashboard-primary-btn"
             >
+                + Report an Item
+            </a>
 
-            <select id="typeFilter">
-
-                <option value="ALL">All Types</option>
-                <option value="LOST">Lost</option>
-                <option value="FOUND">Found</option>
-
-            </select>
+        </section>
 
 
-            <select id="categoryFilter">
+        <!-- =====================================
+             SEARCH & FILTER SECTION
+        ====================================== -->
 
-                <option value="ALL">All Categories</option>
+        <section class="items-filter-section">
 
-            </select>
+            <div class="filter-header">
+
+                <div>
+
+                    <h2>
+                        Search Items
+                    </h2>
+
+                    <p>
+                        Use the filters below to find an item.
+                    </p>
+
+                </div>
+
+            </div>
 
 
-            <input
-                type="text"
-                id="locationFilter"
-                placeholder="Filter by location"
-            >
+            <div class="items-filters">
+
+
+                <!-- Search -->
+
+                <div class="filter-group search-group">
+
+                    <label for="searchInput">
+                        Search
+                    </label>
+
+                    <div class="input-with-icon">
+
+                        <span>
+                            🔍
+                        </span>
+
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Search by item name..."
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Type -->
+
+                <div class="filter-group">
+
+                    <label for="typeFilter">
+                        Type
+                    </label>
+
+                    <select id="typeFilter">
+
+                        <option value="ALL">
+                            All Types
+                        </option>
+
+                        <option value="LOST">
+                            Lost
+                        </option>
+
+                        <option value="FOUND">
+                            Found
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Category -->
+
+                <div class="filter-group">
+
+                    <label for="categoryFilter">
+                        Category
+                    </label>
+
+                    <select id="categoryFilter">
+
+                        <option value="ALL">
+                            All Categories
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Location -->
+
+                <div class="filter-group">
+
+                    <label for="locationFilter">
+                        Location
+                    </label>
+
+                    <div class="input-with-icon">
+
+                        <span>
+                            📍
+                        </span>
+
+                        <input
+                            type="text"
+                            id="locationFilter"
+                            placeholder="Filter by location"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             RESULTS HEADER
+        ====================================== -->
+
+        <section class="items-results-header">
+
+            <div>
+
+                <h2>
+                    Available Items
+                </h2>
+
+                <p>
+                    Browse items reported by users.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             MESSAGE
+             Used by items.js
+        ====================================== -->
+
+        <p
+            id="message"
+            class="items-message"
+        ></p>
+
+
+        <!-- =====================================
+             ITEMS CONTAINER
+
+             IMPORTANT:
+             items.js will generate the
+             item cards inside this container.
+        ====================================== -->
+
+        <section
+            id="itemsContainer"
+            class="items-grid"
+        ></section>
+
+
+        <!-- =====================================
+             EMPTY STATE
+
+             JavaScript can use this area later
+             if there are no matching items.
+        ====================================== -->
+
+        <div
+            id="emptyState"
+            class="empty-state"
+            style="display: none;"
+        >
+
+            <div class="empty-state-icon">
+                🔍
+            </div>
+
+            <h3>
+                No items found
+            </h3>
+
+            <p>
+                Try changing your search or filter options.
+            </p>
 
         </div>
 
 
-        <p id="message"></p>
-
-
-        <div id="itemsContainer" class="items-grid"></div>
-
     </main>
 
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
 
     <script src="js/items.js"></script>
 

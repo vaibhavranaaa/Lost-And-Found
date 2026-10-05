@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta name="viewport"
@@ -11,39 +10,121 @@
     <title>Manage Items - Lost & Found</title>
 
     <link rel="stylesheet" href="css/style.css">
-
 </head>
 
 <body>
 
-    <header>
+    <!-- Admin Navigation -->
+    <header class="main-header admin-header">
 
-        <h1>Lost & Found - Admin</h1>
+        <a href="admin-dashboard.html" class="brand">
+            <span class="brand-icon">🔎</span>
+            <span>Lost & Found</span>
+            <span class="admin-badge">ADMIN</span>
+        </a>
 
-        <nav>
+        <nav class="main-nav">
 
-            <a href="admin-dashboard.html">Dashboard</a>
+            <a href="admin-dashboard.html" class="nav-link">
+                Dashboard
+            </a>
 
-            <a href="admin-items.html">Items</a>
+            <a href="admin-items.html" class="nav-link active">
+                Items
+            </a>
 
-            <a href="admin-users.html">Users</a>
+            <a href="admin-users.html" class="nav-link">
+                Users
+            </a>
 
-            <a href="admin-claims.html">Claims</a>
+            <a href="admin-claims.html" class="nav-link">
+                Claims
+            </a>
 
-            <button id="logoutBtn">Logout</button>
+            <button id="logoutBtn" class="logout-btn">
+                Logout
+            </button>
 
         </nav>
 
     </header>
 
 
-    <main>
+    <!-- Main Content -->
+    <main class="admin-items-page">
 
-        <h2>Manage Items</h2>
+        <!-- Page Header -->
+        <section class="admin-items-hero">
 
-        <p id="message"></p>
+            <div>
 
-        <div id="itemsContainer"></div>
+                <span class="section-label">
+                    ADMIN PORTAL
+                </span>
+
+                <h1>Manage Items</h1>
+
+                <p>
+                    Review and manage all lost and found items
+                    reported on the platform.
+                </p>
+
+            </div>
+
+            <div class="admin-items-hero-icon">
+                📦
+            </div>
+
+        </section>
+
+
+        <!-- Items Section -->
+        <section class="admin-items-section">
+
+            <div class="admin-items-section-header">
+
+                <div>
+                    <span class="admin-section-label">
+                        ITEM MANAGEMENT
+                    </span>
+
+                    <h2>All Reported Items</h2>
+
+                    <p>
+                        View item details and manage reported items.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- Message -->
+            <p id="message" class="admin-items-message"></p>
+
+
+            <!-- Items Container -->
+            <div id="itemsContainer" class="admin-items-grid"></div>
+
+
+            <!-- Empty State -->
+            <div id="adminItemsEmptyState"
+                 class="admin-items-empty-state"
+                 style="display: none;">
+
+                <div class="empty-state-icon">
+                    📦
+                </div>
+
+                <h3>No Items Found</h3>
+
+                <p>
+                    There are currently no lost or found items
+                    available to manage.
+                </p>
+
+            </div>
+
+        </section>
 
     </main>
 

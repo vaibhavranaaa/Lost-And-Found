@@ -15,116 +15,315 @@
 
 <body>
 
-    <header>
+    <!-- Admin Navigation -->
+    <header class="main-header admin-header">
 
-        <h1>Lost & Found - Admin</h1>
+        <a href="admin-dashboard.html" class="brand">
 
-        <nav>
+            <span class="brand-icon">🔎</span>
 
-            <a href="admin-dashboard.html">Dashboard</a>
-            <a href="admin-items.html">Items</a>
-            <a href="admin-claims.html">Claims</a>
-            <a href="admin-users.html">Users</a>
+            <span>Lost & Found</span>
 
-            <button id="logoutBtn">Logout</button>
+            <span class="admin-badge">ADMIN</span>
+
+        </a>
+
+
+        <nav class="main-nav">
+
+            <a
+                href="admin-dashboard.html"
+                class="nav-link active">
+                Dashboard
+            </a>
+
+            <a
+                href="admin-items.html"
+                class="nav-link">
+                Items
+            </a>
+
+            <a
+                href="admin-claims.html"
+                class="nav-link">
+                Claims
+            </a>
+
+            <a
+                href="admin-users.html"
+                class="nav-link">
+                Users
+            </a>
+
+            <button
+                id="logoutBtn"
+                class="logout-btn">
+                Logout
+            </button>
 
         </nav>
 
     </header>
 
 
-    <main>
+    <!-- Main Content -->
+    <main class="admin-dashboard-page">
 
-        <section>
 
-            <h2>Admin Dashboard</h2>
+        <!-- Welcome Section -->
+        <section class="admin-hero">
 
-            <p>
-                Manage users, lost and found items, and claims.
-            </p>
+            <div>
+
+                <span class="section-label">
+                    ADMIN PORTAL
+                </span>
+
+                <h1>
+                    Admin Dashboard
+                </h1>
+
+                <p>
+                    Manage users, lost and found items,
+                    and claims from one place.
+                </p>
+
+            </div>
+
+
+            <div class="admin-hero-icon">
+                🛡️
+            </div>
+
+        </section>
+
+
+        <!-- Management Cards -->
+        <section class="admin-management-section">
+
+            <div class="admin-section-heading">
+
+                <div>
+
+                    <h2>
+                        Management
+                    </h2>
+
+                    <p>
+                        Choose an area to manage.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-dashboard-cards">
+
+
+                <!-- Users -->
+                <article class="admin-card">
+
+                    <div class="admin-card-top">
+
+                        <div class="admin-card-icon users-icon">
+                            👥
+                        </div>
+
+                        <span class="admin-card-number">
+                            01
+                        </span>
+
+                    </div>
+
+                    <h3>
+                        Manage Users
+                    </h3>
+
+                    <p>
+                        View and manage registered users
+                        in the Lost & Found portal.
+                    </p>
+
+                    <a
+                        href="admin-users.html"
+                        class="admin-card-btn">
+
+                        View Users
+
+                        <span>→</span>
+
+                    </a>
+
+                </article>
+
+
+                <!-- Items -->
+                <article class="admin-card">
+
+                    <div class="admin-card-top">
+
+                        <div class="admin-card-icon items-icon">
+                            📦
+                        </div>
+
+                        <span class="admin-card-number">
+                            02
+                        </span>
+
+                    </div>
+
+                    <h3>
+                        Manage Items
+                    </h3>
+
+                    <p>
+                        View, monitor, and manage all
+                        lost and found items.
+                    </p>
+
+                    <a
+                        href="admin-items.html"
+                        class="admin-card-btn">
+
+                        View Items
+
+                        <span>→</span>
+
+                    </a>
+
+                </article>
+
+
+                <!-- Claims -->
+                <article class="admin-card">
+
+                    <div class="admin-card-top">
+
+                        <div class="admin-card-icon claims-icon">
+                            📋
+                        </div>
+
+                        <span class="admin-card-number">
+                            03
+                        </span>
+
+                    </div>
+
+                    <h3>
+                        Manage Claims
+                    </h3>
+
+                    <p>
+                        Review submitted claims and
+                        process them efficiently.
+                    </p>
+
+                    <a
+                        href="admin-claims.html"
+                        class="admin-card-btn">
+
+                        View Claims
+
+                        <span>→</span>
+
+                    </a>
+
+                </article>
+
+
+                <!-- System -->
+                <article class="admin-card">
+
+                    <div class="admin-card-top">
+
+                        <div class="admin-card-icon system-icon">
+                            ⚙️
+                        </div>
+
+                        <span class="admin-card-number">
+                            04
+                        </span>
+
+                    </div>
+
+                    <h3>
+                        System Overview
+                    </h3>
+
+                    <p>
+                        Manage and monitor the overall
+                        Lost & Found portal.
+                    </p>
+
+                    <a
+                        href="admin-items.html"
+                        class="admin-card-btn">
+
+                        Manage Portal
+
+                        <span>→</span>
+
+                    </a>
+
+                </article>
+
+
+            </div>
 
         </section>
 
 
-        <section class="dashboard-cards">
+        <!-- Admin Information -->
+        <section class="admin-info-box">
 
-            <div class="card">
-
-                <h3>Manage Users</h3>
-
-                <p>
-                    View all registered users.
-                </p>
-
-                <a href="admin-users.html">
-                    View Users
-                </a>
-
+            <div class="admin-info-icon">
+                💡
             </div>
 
+            <div>
 
-            <div class="card">
-
-                <h3>Manage Items</h3>
-
-                <p>
-                    View and manage lost and found items.
-                </p>
-
-                <a href="admin-items.html">
-                    View Items
-                </a>
-
-            </div>
-
-
-            <div class="card">
-
-                <h3>Manage Claims</h3>
+                <h3>
+                    Administrator Access
+                </h3>
 
                 <p>
-                    Review and process item claims.
+                    Use the management sections above to
+                    review users, monitor reported items,
+                    and process claims.
                 </p>
-
-                <a href="admin-claims.html">
-                    View Claims
-                </a>
-
-            </div>
-
-
-            <div class="card">
-
-                <h3>System Overview</h3>
-
-                <p>
-                    Manage the Lost & Found portal.
-                </p>
-
-                <a href="admin-items.html">
-                    Manage Portal
-                </a>
 
             </div>
 
         </section>
+
 
     </main>
 
 
     <script>
 
-        const role = localStorage.getItem("role");
+        // Check admin authorization
+
+        const role =
+            localStorage.getItem("role");
+
 
         if (role !== "ADMIN") {
+
             window.location.href = "index.html";
+
         }
+
+
+        // Logout
 
         document
             .getElementById("logoutBtn")
             .addEventListener("click", function () {
 
                 localStorage.removeItem("userId");
+
                 localStorage.removeItem("role");
 
                 window.location.href = "index.html";

@@ -4,9 +4,16 @@ const itemsContainer =
 const message =
     document.getElementById("message");
 
+const emptyState =
+    document.getElementById("adminItemsEmptyState");
+
 const role =
     localStorage.getItem("role");
 
+
+/* =========================================
+   ADMIN AUTHORIZATION
+   ========================================= */
 
 if (role !== "ADMIN") {
 
@@ -15,14 +22,19 @@ if (role !== "ADMIN") {
 }
 
 
+/* =========================================
+   LOAD ITEMS
+   ========================================= */
+
 async function loadItems() {
 
     try {
 
+        message.textContent = "";
+
         const response = await fetch(
             "http://localhost:8080/api/items"
         );
-
 
         if (!response.ok) {
 
@@ -30,11 +42,9 @@ async function loadItems() {
 
         }
 
-
         const items = await response.json();
 
         displayItems(items);
-
 
     } catch (error) {
 
@@ -43,20 +53,39 @@ async function loadItems() {
         message.textContent =
             "Unable to load items.";
 
+        message.style.color = "#dc2626";
+
     }
 
 }
 
 
+/* =========================================
+   DISPLAY ITEMS
+   ========================================= */
+
 function displayItems(items) {
 
     itemsContainer.innerHTML = "";
 
+    if (emptyState) {
+        emptyState.style.display = "none";
+    }
 
-    if (items.length === 0) {
 
-        itemsContainer.innerHTML =
-            "<p>No items found.</p>";
+    if (!items || items.length === 0) {
+
+        if (emptyState) {
+
+            emptyState.style.display = "block";
+
+        } else {
+
+            itemsContainer.innerHTML = `
+                <p>No items found.</p>
+            `;
+
+        }
 
         return;
 
@@ -66,10 +95,36 @@ function displayItems(items) {
     items.forEach(function (item) {
 
         const card =
-            document.createElement("div");
+            document.createElement("article");
 
         card.className = "admin-item-card";
 
+
+        /* -----------------------------------------
+           Item type
+           ----------------------------------------- */
+
+        const type =
+            (item.type || "UNKNOWN").toLowerCase();
+
+        const status =
+            (item.status || "ACTIVE").toLowerCase();
+
+
+        let typeClass = "";
+
+        if (type === "lost") {
+            typeClass = "lost";
+        }
+
+        if (type === "found") {
+            typeClass = "found";
+        }
+
+
+        /* -----------------------------------------
+           Action buttons
+           ----------------------------------------- */
 
         let actions = "";
 
@@ -79,13 +134,21 @@ function displayItems(items) {
             actions = `
 
                 <button
+                    type="button"
+                    class="admin-item-action resolve-action"
                     onclick="resolveItem(${item.id})">
-                    Mark Resolved
+
+                    ✓ Mark Resolved
+
                 </button>
 
                 <button
+                    type="button"
+                    class="admin-item-delete"
                     onclick="deleteItem(${item.id})">
+
                     Delete
+
                 </button>
 
             `;
@@ -95,8 +158,12 @@ function displayItems(items) {
             actions = `
 
                 <button
+                    type="button"
+                    class="admin-item-delete"
                     onclick="deleteItem(${item.id})">
+
                     Delete
+
                 </button>
 
             `;
@@ -104,56 +171,153 @@ function displayItems(items) {
         }
 
 
+        /* -----------------------------------------
+           Card HTML
+           ----------------------------------------- */
+
         card.innerHTML = `
 
-            <h3>${item.itemName}</h3>
+            <div class="admin-item-card-header">
 
-            <p>
-                <strong>ID:</strong>
-                ${item.id}
-            </p>
+                <div class="admin-item-icon">
+                    📦
+                </div>
 
-            <p>
-                <strong>Category:</strong>
-                ${item.category}
-            </p>
-
-            <p>
-                <strong>Description:</strong>
-                ${item.description}
-            </p>
-
-            <p>
-                <strong>Location:</strong>
-                ${item.location}
-            </p>
-
-            <p>
-                <strong>Date:</strong>
-                ${item.date}
-            </p>
-
-            <p>
-                <strong>Type:</strong>
-                ${item.type}
-            </p>
-
-            <p>
-                <strong>User ID:</strong>
-                ${item.userId}
-            </p>
-
-            <p>
-                <strong>Status:</strong>
-
-                <span class="item-status ${item.status.toLowerCase()}">
-                    ${item.status}
+                <span class="admin-item-type ${typeClass}">
+                    ${item.type || "UNKNOWN"}
                 </span>
 
-            </p>
+            </div>
 
-            <div class="item-actions">
-                ${actions}
+
+            <h3 class="admin-item-title">
+                ${item.itemName || "Unnamed Item"}
+            </h3>
+
+
+            <div class="admin-item-details">
+
+                <div class="admin-item-detail">
+
+                    <div class="admin-item-detail-icon">
+                        🆔
+                    </div>
+
+                    <div class="admin-item-detail-content">
+
+                        <small>Item ID</small>
+
+                        <strong>
+                            #${item.id}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="admin-item-detail">
+
+                    <div class="admin-item-detail-icon">
+                        📁
+                    </div>
+
+                    <div class="admin-item-detail-content">
+
+                        <small>Category</small>
+
+                        <strong>
+                            ${item.category || "Not specified"}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="admin-item-detail">
+
+                    <div class="admin-item-detail-icon">
+                        📍
+                    </div>
+
+                    <div class="admin-item-detail-content">
+
+                        <small>Location</small>
+
+                        <strong>
+                            ${item.location || "Not specified"}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="admin-item-detail">
+
+                    <div class="admin-item-detail-icon">
+                        📅
+                    </div>
+
+                    <div class="admin-item-detail-content">
+
+                        <small>Date</small>
+
+                        <strong>
+                            ${item.date || "Not specified"}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="admin-item-detail">
+
+                    <div class="admin-item-detail-icon">
+                        👤
+                    </div>
+
+                    <div class="admin-item-detail-content">
+
+                        <small>Reported By</small>
+
+                        <strong>
+                            User #${item.userId || "N/A"}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-item-description">
+
+                <strong>Description</strong>
+
+                <p>
+                    ${item.description || "No description provided."}
+                </p>
+
+            </div>
+
+
+            <div class="admin-item-card-footer">
+
+                <span class="admin-item-status ${status}">
+                    ${item.status || "ACTIVE"}
+                </span>
+
+
+                <div class="admin-item-actions">
+
+                    ${actions}
+
+                </div>
+
             </div>
 
         `;
@@ -165,6 +329,10 @@ function displayItems(items) {
 
 }
 
+
+/* =========================================
+   RESOLVE ITEM
+   ========================================= */
 
 async function resolveItem(itemId) {
 
@@ -210,6 +378,10 @@ async function resolveItem(itemId) {
 
 }
 
+
+/* =========================================
+   DELETE ITEM
+   ========================================= */
 
 async function deleteItem(itemId) {
 
@@ -258,6 +430,10 @@ async function deleteItem(itemId) {
 }
 
 
+/* =========================================
+   LOGOUT
+   ========================================= */
+
 document
     .getElementById("logoutBtn")
     .addEventListener("click", function () {
@@ -270,5 +446,9 @@ document
 
     });
 
+
+/* =========================================
+   INITIAL LOAD
+   ========================================= */
 
 loadItems();
