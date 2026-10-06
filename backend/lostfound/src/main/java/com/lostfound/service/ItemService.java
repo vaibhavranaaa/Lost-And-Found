@@ -1,8 +1,9 @@
 package com.lostfound.service;
-import com.lostfound.model.ItemType;
+
 import com.lostfound.dto.ItemDTO;
 import com.lostfound.model.Item;
 import com.lostfound.model.ItemStatus;
+import com.lostfound.model.ItemType;
 import com.lostfound.model.User;
 import com.lostfound.repository.ClaimRepository;
 import com.lostfound.repository.ItemRepository;
@@ -10,8 +11,14 @@ import com.lostfound.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ItemService {
@@ -24,6 +31,9 @@ public class ItemService {
 
     @Autowired
     private ClaimRepository claimRepository;
+
+    private final Path uploadDirectory =
+            Paths.get(System.getProperty("user.dir"), "uploads");
 
     public ItemService(ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
@@ -41,6 +51,68 @@ public class ItemService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         item.setUser(user);
+
+        return itemRepository.save(item);
+    }
+
+    public Item createItemWithImage(Item item, MultipartFile image) {
+
+        if (item.getUser() == null || item.getUser().getId() == null) {
+            throw new RuntimeException("User ID is required");
+        }
+
+        Long userId = item.getUser().getId();
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        item.setUser(user);
+
+        if (image != null && !image.isEmpty()) {
+
+            String contentType = image.getContentType();
+
+            if (contentType == null || !contentType.startsWith("image/")) {
+                throw new RuntimeException("Only image files are allowed");
+            }
+
+            try {
+
+                Files.createDirectories(uploadDirectory);
+
+                String originalFilename = image.getOriginalFilename();
+
+                String extension = "";
+
+                if (originalFilename != null &&
+                        originalFilename.contains(".")) {
+
+                    extension = originalFilename.substring(
+                            originalFilename.lastIndexOf(".")
+                    );
+                }
+
+                String fileName =
+                        UUID.randomUUID() + extension;
+
+                Path filePath =
+                        uploadDirectory.resolve(fileName);
+
+                Files.copy(
+                        image.getInputStream(),
+                        filePath
+                );
+
+                item.setImageUrl("/uploads/" + fileName);
+
+            } catch (IOException e) {
+
+                throw new RuntimeException(
+                        "Failed to save image",
+                        e
+                );
+            }
+        }
 
         return itemRepository.save(item);
     }
@@ -72,6 +144,10 @@ public class ItemService {
         item.setLocation(updatedItem.getLocation());
         item.setDate(updatedItem.getDate());
         item.setType(updatedItem.getType());
+
+        if (updatedItem.getImageUrl() != null) {
+            item.setImageUrl(updatedItem.getImageUrl());
+        }
 
         return itemRepository.save(item);
     }
@@ -110,6 +186,7 @@ public class ItemService {
         dto.setType(item.getType());
         dto.setStatus(item.getStatus());
         dto.setUserId(item.getUser().getId());
+        dto.setImageUrl(item.getImageUrl());
 
         return dto;
     }

@@ -8,14 +8,24 @@ import java.time.LocalDate;
 public class ItemDTO {
 
     private Long id;
+
     private String itemName;
+
     private String category;
+
     private String description;
+
     private String location;
+
     private LocalDate date;
+
     private ItemType type;
+
     private ItemStatus status;
+
     private Long userId;
+
+    private String imageUrl;
 
     public ItemDTO() {
     }
@@ -90,5 +100,13 @@ public class ItemDTO {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

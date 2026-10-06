@@ -3,10 +3,6 @@
 ========================================= */
 
 
-/* =========================================
-   GLOBAL VARIABLES
-========================================= */
-
 let allItems = [];
 
 
@@ -61,17 +57,11 @@ async function loadItems() {
         allItems = await response.json();
 
 
-        /* Create category dropdown options */
-
         createCategoryOptions();
 
 
-        /* Check URL for LOST / FOUND filter */
-
         applyUrlFilter();
 
-
-        /* Display items */
 
         filterItems();
 
@@ -134,12 +124,9 @@ function createCategoryOptions() {
 
 /* =========================================
    APPLY URL FILTER
-=========================================
 
    Example:
-
    items.html?type=LOST
-
    items.html?type=FOUND
 ========================================= */
 
@@ -176,14 +163,8 @@ function displayItems(items) {
     itemsContainer.innerHTML = "";
 
 
-    /* Clear previous message */
-
     message.textContent = "";
 
-
-    /* =====================================
-       NO ITEMS
-    ====================================== */
 
     if (items.length === 0) {
 
@@ -198,18 +179,12 @@ function displayItems(items) {
     }
 
 
-    /* Hide empty state */
-
     if (emptyState) {
 
         emptyState.style.display = "none";
 
     }
 
-
-    /* =====================================
-       CREATE ITEM CARDS
-    ====================================== */
 
     items.forEach(item => {
 
@@ -220,33 +195,61 @@ function displayItems(items) {
         card.className = "item-card";
 
 
-        /* Get status class */
-
         const statusClass =
             getStatusClass(item.status);
 
 
-        /* Get type class */
-
         const typeClass =
             getTypeClass(item.type);
+
+
+        let imageContent;
+
+
+        if (item.imageUrl) {
+
+            imageContent = `
+                <img
+                    src="http://localhost:8080${item.imageUrl}"
+                    alt="${item.itemName}"
+                    class="item-image"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                >
+
+                <div
+                    class="item-card-icon image-fallback"
+                    style="display: none;"
+                >
+                    📦
+                </div>
+            `;
+
+        } else {
+
+            imageContent = `
+                <div class="item-card-icon">
+                    📦
+                </div>
+            `;
+
+        }
 
 
         card.innerHTML = `
 
             <!-- Card header -->
 
-            <div class="item-card-header">
+            <div class="item-card-image">
+    ${imageContent}
+</div>
 
-                <div class="item-card-icon">
-                    📦
-                </div>
+<div class="item-card-header">
 
-                <span class="item-status ${statusClass}">
-                    ${item.status || "ACTIVE"}
-                </span>
+    <span class="item-status ${statusClass}">
+        ${item.status || "ACTIVE"}
+    </span>
 
-            </div>
+</div>
 
 
             <!-- Item name -->
@@ -460,11 +463,10 @@ function filterItems() {
         allItems.filter(item => {
 
 
-            /* Search filter */
-
             const itemName =
                 (item.itemName || "")
                     .toLowerCase();
+
 
             const description =
                 (item.description || "")
@@ -476,21 +478,15 @@ function filterItems() {
                 description.includes(search);
 
 
-            /* Type filter */
-
             const matchesType =
                 type === "ALL" ||
                 item.type === type;
 
 
-            /* Category filter */
-
             const matchesCategory =
                 category === "ALL" ||
                 item.category === category;
 
-
-            /* Location filter */
 
             const itemLocation =
                 (item.location || "")

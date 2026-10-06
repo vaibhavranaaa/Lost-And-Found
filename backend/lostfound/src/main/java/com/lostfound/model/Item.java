@@ -21,6 +21,8 @@ public class Item {
 
     private LocalDate date;
 
+    private String imageUrl;
+
     @Enumerated(EnumType.STRING)
     private ItemType type;
 
@@ -80,6 +82,14 @@ public class Item {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public ItemType getType() {

@@ -6,7 +6,9 @@ import com.lostfound.model.ItemType;
 import com.lostfound.service.ItemService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -23,6 +25,38 @@ public class ItemController {
     @PostMapping
     public ResponseEntity<Item> createItem(@RequestBody Item item) {
         return ResponseEntity.ok(itemService.createItem(item));
+    }
+
+    @PostMapping("/with-image")
+    public ResponseEntity<Item> createItemWithImage(
+            @RequestParam String itemName,
+            @RequestParam String category,
+            @RequestParam String description,
+            @RequestParam String location,
+            @RequestParam String date,
+            @RequestParam ItemType type,
+            @RequestParam Long userId,
+            @RequestParam(required = false) MultipartFile image) {
+
+        Item item = new Item();
+
+        item.setItemName(itemName);
+        item.setCategory(category);
+        item.setDescription(description);
+        item.setLocation(location);
+        item.setDate(LocalDate.parse(date));
+        item.setType(type);
+
+        com.lostfound.model.User user = new com.lostfound.model.User();
+        user.setId(userId);
+
+        item.setUser(user);
+
+        item.setStatus(com.lostfound.model.ItemStatus.ACTIVE);
+
+        return ResponseEntity.ok(
+                itemService.createItemWithImage(item, image)
+        );
     }
 
     @GetMapping

@@ -179,9 +179,22 @@ function displayItems(items) {
 
             <div class="admin-item-card-header">
 
-                <div class="admin-item-icon">
-                    📦
-                </div>
+                <div class="admin-item-image">
+    ${
+        item.imageUrl
+            ? `<img
+                src="http://localhost:8080${item.imageUrl}"
+                alt="${item.itemName}"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            >
+            <div class="admin-item-icon image-fallback" style="display: none;">
+                📦
+            </div>`
+            : `<div class="admin-item-icon">
+                📦
+            </div>`
+    }
+</div>
 
                 <span class="admin-item-type ${typeClass}">
                     ${item.type || "UNKNOWN"}

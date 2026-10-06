@@ -101,9 +101,13 @@ function displayItem(item) {
 
         <div class="details-card-top">
 
-            <div class="details-item-icon">
-                📦
-            </div>
+            <div class="details-image">
+    ${
+        item.imageUrl
+            ? `<img src="http://localhost:8080${item.imageUrl}" alt="${item.itemName}">`
+            : `<div class="details-icon">📦</div>`
+    }
+</div>
 
             <div class="details-badges">
 
